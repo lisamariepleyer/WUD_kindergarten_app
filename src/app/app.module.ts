@@ -24,7 +24,7 @@ import { ButtonComponent } from './dashboard/button/button.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
