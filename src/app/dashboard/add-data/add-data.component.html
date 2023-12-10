@@ -1,11 +1,27 @@
 <form [formGroup]="addChildForm" (ngSubmit)="onSubmit()">
     <h2>Ihr Kind anmelden!</h2>
-    <input placeholder="Name" type="input" formControlName="name"><br />
-    <input placeholder="Geburtsdatum" type="date" formControlName="birthDate"><br />
-    <select formControlName="kindergardenId">
-        <option value="" disabled>Bitte auswählen</option>
-        <option *ngFor="let kindergarden of storeService.kindergardens" [ngValue]="kindergarden.id">
-            {{kindergarden.name}}, {{kindergarden.address}}</option>
-    </select>
-    <button type="submit">Erfassen</button>
+
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" required>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Kindergarten</mat-label>
+        <select matNativeControl formControlName="kindergardenId" required>
+            <option value="" disabled>Bitte auswählen</option>
+            <option *ngFor="let kindergarden of storeService.kindergardens" [ngValue]="kindergarden.id">
+                {{kindergarden.name}}, {{kindergarden.address}}</option>
+        </select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="datePicker" formControlName="birthDate" [min]="minDate" [max]="maxDate" required readonly>
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="datePicker"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #datePicker></mat-datepicker>
+    </mat-form-field>
+
+    <button mat-raised-button type="submit">Erfassen</button>
 </form>

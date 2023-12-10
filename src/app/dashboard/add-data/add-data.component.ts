@@ -9,8 +9,13 @@ import { StoreService } from 'src/app/shared/store.service';
   styleUrls: ['./add-data.component.scss']
 })
 export class AddDataComponent implements OnInit{
+  minDate: Date = new Date();
+  maxDate: Date = new Date();
 
-  constructor(private formbuilder: FormBuilder, public storeService: StoreService, public backendService: BackendService) {
+  constructor(
+    private formbuilder: FormBuilder,
+    public storeService: StoreService,
+    public backendService: BackendService) {
   }
   public addChildForm: any;
   @Input() currentPage!: number;
@@ -21,6 +26,10 @@ export class AddDataComponent implements OnInit{
       kindergardenId: ['', Validators.required],
       birthDate: [null, Validators.required]
     })
+
+    const currentDate = new Date();
+    this.minDate = new Date(currentDate.getFullYear() - 7, 0, 1);
+    this.maxDate = currentDate;
   }
 
   onSubmit() {
