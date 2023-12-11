@@ -4,6 +4,7 @@ import { Kindergarden } from './interfaces/Kindergarden';
 import { StoreService } from './store.service';
 import { Child, ChildResponse } from './interfaces/Child';
 import { ConfigService } from './config.service';
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -27,10 +28,8 @@ export class BackendService {
     });
     }
 
-    public addChildData(child: Child, page:  number) {
-      this.http.post('http://localhost:5000/childs', child).subscribe(_ => {
-        this.getChildren(page);
-      })
+    public addChildData(child: Child, page:  number): Observable<any> {
+      return this.http.post('http://localhost:5000/childs', child);
     }
 
     public deleteChildData(childId: string, page: number) {

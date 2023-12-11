@@ -12,6 +12,9 @@ export class AddDataComponent implements OnInit{
   minDate: Date = new Date();
   maxDate: Date = new Date();
 
+  successMessage: string = '';
+  errorMessage: string = '';
+
   constructor(
     private formbuilder: FormBuilder,
     public storeService: StoreService,
@@ -35,7 +38,17 @@ export class AddDataComponent implements OnInit{
   onSubmit() {
     if(this.addChildForm.valid) {
       console.log(this.currentPage);
-      this.backendService.addChildData(this.addChildForm.value, this.currentPage);
+      this.backendService.addChildData(this.addChildForm.value, this.currentPage)
+        .subscribe({
+          next: (response) => {
+            this.successMessage = 'Kind erfolgreich angemeldet!';
+            this.errorMessage = '';
+          },
+          error: (error) => {
+            this.errorMessage = 'Anmeldung fehlgeschlagen. Bitte erneut versuchen.';
+            this.successMessage = '';
+          }
+        });
     }
   }
 }

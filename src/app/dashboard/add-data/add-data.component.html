@@ -26,5 +26,13 @@
         <mat-error>Valides Datum auswählen</mat-error>
     </mat-form-field>
 
+  <div *ngIf="successMessage" class="alert alert-success" role="alert">
+    {{ successMessage }}
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+    {{ errorMessage }}
+  </div>
+
     <button mat-raised-button type="submit">Erfassen</button>
 </form>
