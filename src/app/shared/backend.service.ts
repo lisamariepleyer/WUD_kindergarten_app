@@ -3,14 +3,16 @@ import { Injectable } from '@angular/core';
 import { Kindergarden } from './interfaces/Kindergarden';
 import { StoreService } from './store.service';
 import { Child, ChildResponse } from './interfaces/Child';
-import { CHILDREN_PER_PAGE } from './constants';
+import { ConfigService } from './config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BackendService {
 
-  constructor(private http: HttpClient, private storeService: StoreService) { }
+  constructor(private http: HttpClient,
+              private storeService: StoreService,
+              private configService: ConfigService) { }
 
   public getKindergardens() {
     this.http.get<Kindergarden[]>('http://localhost:5000/kindergardens').subscribe(data => {
@@ -19,10 +21,9 @@ export class BackendService {
   }
 
   public getChildren(page: number) {
-    this.http.get<ChildResponse[]>(`http://localhost:5000/childs?_expand=kindergarden&_page=${page}&_limit=${CHILDREN_PER_PAGE}`, { observe: 'response' }).subscribe(data => {
+    this.http.get<ChildResponse[]>(`http://localhost:5000/childs?_expand=kindergarden&_page=${page + 1}&_limit=${this.configService.getChildrenPerPage()}`, { observe: 'response' }).subscribe(data => {
       this.storeService.children = data.body!;
       this.storeService.childrenTotalCount = Number(data.headers.get('X-Total-Count'));
-
     });
     }
 

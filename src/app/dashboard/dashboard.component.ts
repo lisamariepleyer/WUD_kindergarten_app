@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-  public currentPage: number = 1;
+  public currentPage: number = 0;
   public showAddData = true;
 
   receiveMessage(newPageCount: number) {
