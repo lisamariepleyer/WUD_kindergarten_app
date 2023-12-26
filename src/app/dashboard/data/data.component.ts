@@ -19,7 +19,7 @@ export class DataComponent implements OnInit {
   public page: number = 0;
 
   ngOnInit(): void {
-    this.backendService.getChildren(this.currentPage);
+    this.backendService.getChildren(0, this.currentPage);
   }
 
   getAge(birthDate: string) {
@@ -41,7 +41,7 @@ export class DataComponent implements OnInit {
     this.currentPage = event.pageIndex;
     this.configService.setChildrenPerPage(event.pageSize);
     this.selectPageEvent.emit(this.currentPage);
-    this.backendService.getChildren(this.currentPage);
+    this.backendService.getChildren(0, this.currentPage);
   }
 
   protected readonly CHILDREN_PER_PAGE = this.configService.getChildrenPerPage();

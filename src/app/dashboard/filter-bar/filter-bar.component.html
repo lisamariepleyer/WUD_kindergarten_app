@@ -1,0 +1,12 @@
+<form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <mat-label>Nach Kindergarten filtern</mat-label>
+    <select matNativeControl formControlName="kindergardenFilter">
+      <option value="">Keine Auswahl</option>
+      <option *ngFor="let kindergarden of storeService.kindergardens" [ngValue]="kindergarden.id">
+        {{kindergarden.name}}, {{kindergarden.address}}</option>
+    </select>
+  </mat-form-field>
+
+  <button mat-raised-button type="submit">Filtern</button>
+</form>

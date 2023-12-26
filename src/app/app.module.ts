@@ -16,6 +16,7 @@ import { MatNativeDateModule } from "@angular/material/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { FilterBarComponent } from './dashboard/filter-bar/filter-bar.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     AddDataComponent,
     DataComponent,
     HeaderComponent,
-    ButtonComponent
+    ButtonComponent,
+    FilterBarComponent
   ],
   imports: [
     BrowserModule,

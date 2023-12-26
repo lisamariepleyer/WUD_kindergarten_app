@@ -21,20 +21,35 @@ export class BackendService {
     });
   }
 
-  public getChildren(page: number) {
-    this.http.get<ChildResponse[]>(`http://localhost:5000/childs?_expand=kindergarden&_page=${page + 1}&_limit=${this.configService.getChildrenPerPage()}`, { observe: 'response' }).subscribe(data => {
-      this.storeService.children = data.body!;
-      this.storeService.childrenTotalCount = Number(data.headers.get('X-Total-Count'));
-    });
-    }
-
-    public addChildData(child: Child, page:  number): Observable<any> {
-      return this.http.post('http://localhost:5000/childs', child);
-    }
-
-    public deleteChildData(childId: string, page: number) {
-      this.http.delete(`http://localhost:5000/childs/${childId}`).subscribe(_=> {
-        this.getChildren(page);
-      })
+  public getChildren(kindergartenID= 0, page = 0) {
+    if (kindergartenID > 0) {
+      this.http.get<ChildResponse[]>(`http://localhost:5000/childs?_expand=kindergarden&_page=${page + 1}&kindergardenId=${kindergartenID}`, { observe: 'response' }).subscribe(data => {
+        this.storeService.children = data.body!;
+        this.storeService.childrenTotalCount = Number(data.headers.get('X-Total-Count'));
+        this.storeService.hidePaginator = true;
+      });
+    } else {
+      this.http.get<ChildResponse[]>(`http://localhost:5000/childs?_expand=kindergarden&_page=${page + 1}&_limit=${this.configService.getChildrenPerPage()}`, { observe: 'response' }).subscribe(data => {
+        this.storeService.children = data.body!;
+        this.storeService.childrenTotalCount = Number(data.headers.get('X-Total-Count'));
+        this.storeService.hidePaginator = false;
+      });
     }
   }
+
+  public getAllChildren() {
+    this.http.get<ChildResponse[]>(`http://localhost:5000/childs?_expand=kindergarden`, { observe: 'response' }).subscribe(data => {
+      this.storeService.allChildren = data.body!;
+    });
+  }
+
+  public addChildData(child: Child, page:  number): Observable<any> {
+    return this.http.post('http://localhost:5000/childs', child);
+  }
+
+  public deleteChildData(childId: string, page: number) {
+    this.http.delete(`http://localhost:5000/childs/${childId}`).subscribe(_=> {
+      this.getChildren(page);
+    })
+  }
+}

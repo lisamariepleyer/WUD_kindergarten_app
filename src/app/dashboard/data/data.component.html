@@ -23,6 +23,7 @@
             <mat-paginator [length]="storeService.childrenTotalCount"
                            [pageSize]="CHILDREN_PER_PAGE"
                            [pageSizeOptions]="[2, 5, 10, 20]"
+                           [hidden]="storeService.hidePaginator"
                            (page)="onPageChange($event)">
             </mat-paginator>
         </div>
