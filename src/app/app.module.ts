@@ -17,6 +17,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FilterBarComponent } from './dashboard/filter-bar/filter-bar.component';
 import { KindergartenPageComponent } from './kindergarten-page/kindergarten-page.component';
 
@@ -44,7 +45,8 @@ import { KindergartenPageComponent } from './kindergarten-page/kindergarten-page
     MatButtonModule,
     MatMenuModule,
     MatPaginatorModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

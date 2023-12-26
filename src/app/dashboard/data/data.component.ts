@@ -3,6 +3,8 @@ import { BackendService } from 'src/app/shared/backend.service';
 import { ConfigService } from "../../shared/config.service";
 import { StoreService } from 'src/app/shared/store.service';
 import { PageEvent } from "@angular/material/paginator";
+import {HttpClient} from "@angular/common/http";
+import {Kindergarden} from "../../shared/interfaces/Kindergarden";
 
 @Component({
   selector: 'app-data',
@@ -10,8 +12,10 @@ import { PageEvent } from "@angular/material/paginator";
   styleUrls: ['./data.component.scss']
 })
 export class DataComponent implements OnInit {
+  isLoading = false;
 
-  constructor(public storeService: StoreService,
+  constructor(private http: HttpClient,
+              public storeService: StoreService,
               private backendService: BackendService,
               private configService: ConfigService) {}
   @Input() currentPage!: number;
@@ -20,6 +24,7 @@ export class DataComponent implements OnInit {
 
   ngOnInit(): void {
     this.backendService.getChildren(0, this.currentPage);
+    this.initiateSpinner();
   }
 
   getAge(birthDate: string) {
@@ -34,6 +39,7 @@ export class DataComponent implements OnInit {
   }
 
   public cancelRegistration(childId: string) {
+    this.initiateSpinner();
     this.backendService.deleteChildData(childId, this.currentPage);
   }
 
@@ -42,6 +48,13 @@ export class DataComponent implements OnInit {
     this.configService.setChildrenPerPage(event.pageSize);
     this.selectPageEvent.emit(this.currentPage);
     this.backendService.getChildren(0, this.currentPage);
+  }
+
+  initiateSpinner() {
+    this.isLoading = true;
+    this.http.get<Kindergarden[]>('http://localhost:5000/kindergardens').subscribe(data => {
+      this.isLoading = false;
+    });
   }
 
   protected readonly CHILDREN_PER_PAGE = this.configService.getChildrenPerPage();
