@@ -1,0 +1,17 @@
+<mat-accordion>
+  <div *ngFor="let kindergarten of storeService.kindergardens">
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{kindergarten.name}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      {{kindergarten.betreiber}}<br>
+      {{kindergarten.address}}<br>
+      Typ: {{getKindergartenType(kindergarten.typ)}}<br><br>
+      <img width="500" src="{{kindergarten.imageUrl}}">
+
+    </mat-expansion-panel>
+  </div>
+</mat-accordion>

@@ -1,0 +1,10 @@
+:host {
+  display: flex;
+  justify-content: center;
+  height: 100%; // Ensure the parent element has a defined height
+
+  mat-accordion {
+    width: 50%;
+    // Add additional styling as needed
+  }
+}

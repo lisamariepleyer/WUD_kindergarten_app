@@ -16,7 +16,9 @@ import { MatNativeDateModule } from "@angular/material/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { FilterBarComponent } from './dashboard/filter-bar/filter-bar.component';
+import { KindergartenPageComponent } from './kindergarten-page/kindergarten-page.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { FilterBarComponent } from './dashboard/filter-bar/filter-bar.component'
     DataComponent,
     HeaderComponent,
     ButtonComponent,
-    FilterBarComponent
+    FilterBarComponent,
+    KindergartenPageComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import { FilterBarComponent } from './dashboard/filter-bar/filter-bar.component'
     MatNativeDateModule,
     MatButtonModule,
     MatMenuModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]
