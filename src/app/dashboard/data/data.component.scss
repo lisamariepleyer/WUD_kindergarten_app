@@ -9,3 +9,13 @@ button.active {
 button {
     margin-right: 5px;
 }
+
+:host {
+  display: flex;
+  justify-content: center;
+
+  mat-spinner {
+    width: 50%;
+  }
+}
+
