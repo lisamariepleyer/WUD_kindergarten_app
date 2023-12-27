@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { BackendService } from 'src/app/shared/backend.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { StoreService } from 'src/app/shared/store.service';
@@ -16,6 +16,7 @@ export class FilterBarComponent implements OnInit {
     public storeService: StoreService) {
   }
   public filterForm: any;
+  @Output() kindergartenIDFilter = new EventEmitter<number>();
 
   ngOnInit(): void {
     this.filterForm = this.formbuilder.group({
@@ -26,7 +27,10 @@ export class FilterBarComponent implements OnInit {
   }
 
   onSubmit() {
-    const kindergartenIDfilter = this.filterForm.value.kindergardenFilter;
-    this.backendService.getChildren(kindergartenIDfilter, 0);
+    const selectedKindergardenFilter = this.filterForm.value.kindergardenFilter;
+
+    this.kindergartenIDFilter.emit(selectedKindergardenFilter);
+
+    this.backendService.getChildren(selectedKindergardenFilter, 0);
   }
 }

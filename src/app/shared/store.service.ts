@@ -13,5 +13,4 @@ export class StoreService {
   public children: ChildResponse[] = [];
   public allChildren: ChildResponse[] = [];
   public childrenTotalCount: number = 0;
-  public hidePaginator: boolean = false;
 }

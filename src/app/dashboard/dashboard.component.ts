@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class DashboardComponent {
   public currentPage: number = 0;
   public showAddData = false;
+  kindergartenIDFilter = 0;
 
   receiveMessage(newPageCount: number) {
     this.currentPage = newPageCount;
@@ -15,6 +16,10 @@ export class DashboardComponent {
 
   toggleButtonClicked(showAddData: boolean) {
     this.showAddData = showAddData;
+  }
+
+  onSetFilter(kigaID: number) {
+    this.kindergartenIDFilter = kigaID;
   }
 
 }

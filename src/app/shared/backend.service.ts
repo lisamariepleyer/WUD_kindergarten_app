@@ -22,19 +22,16 @@ export class BackendService {
   }
 
   public getChildren(kindergartenID= 0, page = 0) {
+
+    var kindergartenFilterParam = ""
     if (kindergartenID > 0) {
-      this.http.get<ChildResponse[]>(`http://localhost:5000/childs?_expand=kindergarden&_page=${page + 1}&kindergardenId=${kindergartenID}`, { observe: 'response' }).subscribe(data => {
-        this.storeService.children = data.body!;
-        this.storeService.childrenTotalCount = Number(data.headers.get('X-Total-Count'));
-        this.storeService.hidePaginator = true;
-      });
-    } else {
-      this.http.get<ChildResponse[]>(`http://localhost:5000/childs?_expand=kindergarden&_page=${page + 1}&_limit=${this.configService.getChildrenPerPage()}`, { observe: 'response' }).subscribe(data => {
-        this.storeService.children = data.body!;
-        this.storeService.childrenTotalCount = Number(data.headers.get('X-Total-Count'));
-        this.storeService.hidePaginator = false;
-      });
+      kindergartenFilterParam = `&kindergardenId=${kindergartenID}`
     }
+
+    this.http.get<ChildResponse[]>(`http://localhost:5000/childs?_expand=kindergarden&_page=${page + 1}&_limit=${this.configService.getChildrenPerPage()}${kindergartenFilterParam}`, { observe: 'response' }).subscribe(data => {
+      this.storeService.children = data.body!;
+      this.storeService.childrenTotalCount = Number(data.headers.get('X-Total-Count'));
+    });
   }
 
   public getAllChildren() {
