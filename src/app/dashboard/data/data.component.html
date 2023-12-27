@@ -7,6 +7,7 @@
         <p class="col-xl-1 col-lg-1">Adresse</p>
         <p class="col-xl-1 col-lg-1">Alter</p>
         <p class="col-xl-1 col-lg-1">Geburtsdatum</p>
+        <p class="col-xl-1 col-lg-1">Anmeldung</p>
         <p class="col-xl-1 col-lg-1"></p>
     </div>
     <div *ngFor="let child of storeService.children" class="row justify-content-center align-items-center">
@@ -15,6 +16,7 @@
         <p class="col-xl-1 col-lg-1">{{child.kindergarden.address}}</p>
         <p class="col-xl-1 col-lg-1">{{getAge(child.birthDate)}}</p>
         <p class="col-xl-1 col-lg-1">{{child.birthDate | date:'longDate'}}</p>
+        <p class="col-xl-1 col-lg-1">{{child.signupDate | date:'longDate'}}</p>
         <div class="col-xl-1 col-lg-1">
             <button mat-raised-button (click)="cancelRegistration(child.id)">Abmelden</button>
         </div>

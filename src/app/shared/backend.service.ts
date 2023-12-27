@@ -22,11 +22,15 @@ export class BackendService {
   }
 
   public getChildren(kindergartenID= 0, page = 0,
-                     isOrderedByName = false) {
+                     isOrderedByName = false,
+                     isOrderedBySignupDate = false, orderBySignupDate = "asc") {
 
     var orderParam = ""
     if (isOrderedByName) {
       orderParam = "&_sort=kindergardenId,name&_order=asc,asc"
+    }
+    if (isOrderedBySignupDate) {
+      orderParam = `&_sort=signupDate&_order=${orderBySignupDate}`
     }
 
     var kindergartenFilterParam = ""

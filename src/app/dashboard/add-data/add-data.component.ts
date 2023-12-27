@@ -24,15 +24,17 @@ export class AddDataComponent implements OnInit{
   @Input() currentPage!: number;
 
   ngOnInit(): void {
+    const currentDate = new Date();
+    let formattedDate = currentDate.getFullYear() + '-' + (currentDate.getMonth() + 1) + '-' + currentDate.getDate();
+    this.minDate = new Date(currentDate.getFullYear() - 7, 0, 1);
+    this.maxDate = currentDate;
+
     this.addChildForm = this.formbuilder.group({
       name: ['', [Validators.required]],
       kindergardenId: ['', Validators.required],
-      birthDate: [null, Validators.required]
+      birthDate: [null, Validators.required],
+      signupDate: [formattedDate]
     })
-
-    const currentDate = new Date();
-    this.minDate = new Date(currentDate.getFullYear() - 7, 0, 1);
-    this.maxDate = currentDate;
   }
 
   onSubmit() {

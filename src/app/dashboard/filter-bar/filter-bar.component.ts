@@ -18,13 +18,15 @@ export class FilterBarComponent implements OnInit {
   public filterForm: any;
   @Output() kindergartenIDFilter = new EventEmitter<number>();
   @Output() isOrderByName = new EventEmitter<boolean>();
-  //@Output() signupOrder = new EventEmitter<string>();
+  @Output() isOrderBySignupDate = new EventEmitter<boolean>();
+  @Output() signupOrder = new EventEmitter<string>();
+  signupOrderDefault = "asc";
 
   ngOnInit(): void {
     this.filterForm = this.formbuilder.group({
       kindergardenFilter: [''],
-      NameOrder: ['']
-      //SignupOrder: ['']
+      NameOrder: [''],
+      SignupOrder: ['']
     })
 
     this.backendService.getChildren();
@@ -33,18 +35,24 @@ export class FilterBarComponent implements OnInit {
   onSubmit() {
     const selectedKindergardenFilter = this.filterForm.value.kindergardenFilter;
     const selectedOrder = this.filterForm.value.NameOrder;
+    const selectedSignupOrder = this.filterForm.value.SignupOrder;
 
     var selectedIsOrderByName = false;
+    var selectedIsOrderBySignupDate = false;
     if (selectedOrder === "name") {
       selectedIsOrderByName = true;
+      selectedIsOrderBySignupDate = false;
     }
-    //const selectedSignupOrder = this.filterForm.value.SignupOrder;
+    if (selectedOrder === "signupdate") {
+      selectedIsOrderByName = false;
+      selectedIsOrderBySignupDate = true;
+    }
 
-    console.log(this.filterForm.value.NameOrder);
     this.kindergartenIDFilter.emit(selectedKindergardenFilter);
     this.isOrderByName.emit(selectedIsOrderByName);
-    //this.signupOrder.emit(selectedSignupOrder);
+    this.isOrderBySignupDate.emit(selectedIsOrderBySignupDate);
+    this.signupOrder.emit(selectedSignupOrder);
 
-    this.backendService.getChildren(selectedKindergardenFilter, 0, selectedIsOrderByName);
+    this.backendService.getChildren(selectedKindergardenFilter, 0, selectedIsOrderByName, selectedIsOrderBySignupDate, selectedSignupOrder);
   }
 }

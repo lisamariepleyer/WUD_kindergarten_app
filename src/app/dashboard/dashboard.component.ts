@@ -10,6 +10,8 @@ export class DashboardComponent {
   public showAddData = false;
   kindergartenIDFilter = 0;
   isOrderByName = false;
+  isOrderBySignupDate = false;
+  signupOrder = "asc";
 
   receiveMessage(newPageCount: number) {
     this.currentPage = newPageCount;
@@ -23,8 +25,16 @@ export class DashboardComponent {
     this.kindergartenIDFilter = kindergartenIDFilter;
   }
 
-  toggleSetOrder(isOrderByName: boolean) {
+  toggleSetIsNameOrder(isOrderByName: boolean) {
     this.isOrderByName = isOrderByName;
+  }
+
+  toggleSetIsSignupOrder(isOrderBySignupDate: boolean) {
+    this.isOrderBySignupDate = isOrderBySignupDate;
+  }
+
+  toggleSetSignupOrder(signupOrder: string) {
+    this.signupOrder = signupOrder;
   }
 
 }

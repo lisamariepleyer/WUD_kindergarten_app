@@ -17,5 +17,13 @@
     </select>
   </mat-form-field>
 
+  <mat-form-field>
+    <mat-label>Nach Anmeldedatum ordnen</mat-label>
+    <select matNativeControl formControlName="SignupOrder" [(ngModel)]="signupOrderDefault">
+      <option value="asc">Aufsteigend</option>
+      <option value="desc">Absteigend</option>
+    </select>
+  </mat-form-field>
+
   <button mat-raised-button type="submit">Filtern</button>
 </form>

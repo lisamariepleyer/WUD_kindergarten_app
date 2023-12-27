@@ -23,9 +23,12 @@ export class DataComponent implements OnInit {
   public page: number = 0;
   @Input('kindergartenIDFilter') kindergartenIDFilter = 0;
   @Input('isOrderByName') isOrderByName = false;
+  @Input('isOrderBySignupDate') isOrderBySignupDate = false;
+  @Input('signupOrder') signupOrder = "asc";
 
   ngOnInit(): void {
-    this.backendService.getChildren(this.kindergartenIDFilter, this.currentPage, this.isOrderByName);
+    console.log(this.kindergartenIDFilter, this.currentPage, this.isOrderByName, this.isOrderBySignupDate, this.signupOrder);
+    this.backendService.getChildren(this.kindergartenIDFilter, this.currentPage, this.isOrderByName, this.isOrderBySignupDate, this.signupOrder);
     this.initiateSpinner();
   }
 
@@ -49,7 +52,8 @@ export class DataComponent implements OnInit {
     this.currentPage = event.pageIndex;
     this.configService.setChildrenPerPage(event.pageSize);
     this.selectPageEvent.emit(this.currentPage);
-    this.backendService.getChildren(this.kindergartenIDFilter, this.currentPage, this.isOrderByName);
+    console.log(this.kindergartenIDFilter, this.currentPage, this.isOrderByName, this.isOrderBySignupDate, this.signupOrder);
+    this.backendService.getChildren(this.kindergartenIDFilter, this.currentPage, this.isOrderByName, this.isOrderBySignupDate, this.signupOrder);
   }
 
   initiateSpinner() {
