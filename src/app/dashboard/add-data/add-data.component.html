@@ -1,3 +1,13 @@
+<div class="alert">
+  <div *ngIf="successMessage" class="alert alert-success" role="alert">
+    {{ successMessage }}
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+    {{ errorMessage }}
+  </div>
+</div>
+
 <form [formGroup]="addChildForm" (ngSubmit)="onSubmit()">
     <h2>Ihr Kind anmelden!</h2>
 
@@ -25,14 +35,6 @@
         <mat-datepicker touchUi #datePicker></mat-datepicker>
         <mat-error>Valides Datum auswählen</mat-error>
     </mat-form-field>
-
-  <div *ngIf="successMessage" class="alert alert-success" role="alert">
-    {{ successMessage }}
-  </div>
-
-  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
-    {{ errorMessage }}
-  </div>
 
     <button mat-raised-button type="submit">Anmelden</button>
 </form>

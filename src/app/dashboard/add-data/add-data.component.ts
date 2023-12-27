@@ -37,7 +37,6 @@ export class AddDataComponent implements OnInit{
 
   onSubmit() {
     if(this.addChildForm.valid) {
-      console.log(this.currentPage);
       this.backendService.addChildData(this.addChildForm.value, this.currentPage)
         .subscribe({
           next: (response) => {
