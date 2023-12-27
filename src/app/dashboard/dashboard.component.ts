@@ -9,6 +9,7 @@ export class DashboardComponent {
   public currentPage: number = 0;
   public showAddData = false;
   kindergartenIDFilter = 0;
+  isOrderByName = false;
 
   receiveMessage(newPageCount: number) {
     this.currentPage = newPageCount;
@@ -18,8 +19,12 @@ export class DashboardComponent {
     this.showAddData = showAddData;
   }
 
-  onSetFilter(kigaID: number) {
-    this.kindergartenIDFilter = kigaID;
+  toggleSetFilter(kindergartenIDFilter: number) {
+    this.kindergartenIDFilter = kindergartenIDFilter;
+  }
+
+  toggleSetOrder(isOrderByName: boolean) {
+    this.isOrderByName = isOrderByName;
   }
 
 }

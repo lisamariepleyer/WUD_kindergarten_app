@@ -8,5 +8,14 @@
     </select>
   </mat-form-field>
 
+  <mat-form-field>
+    <mat-label>Ordnen nach ...</mat-label>
+    <select matNativeControl formControlName="NameOrder">
+      <option value="">Keine Auswahl</option>
+      <option value="name">Kindergarten und Name</option>
+      <option value="signupdate">Hinzufügungsdatum</option>
+    </select>
+  </mat-form-field>
+
   <button mat-raised-button type="submit">Filtern</button>
 </form>

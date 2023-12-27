@@ -22,9 +22,10 @@ export class DataComponent implements OnInit {
   @Output() selectPageEvent = new EventEmitter<number>();
   public page: number = 0;
   @Input('kindergartenIDFilter') kindergartenIDFilter = 0;
+  @Input('isOrderByName') isOrderByName = false;
 
   ngOnInit(): void {
-    this.backendService.getChildren(0, this.currentPage);
+    this.backendService.getChildren(this.kindergartenIDFilter, this.currentPage, this.isOrderByName);
     this.initiateSpinner();
   }
 
@@ -48,7 +49,7 @@ export class DataComponent implements OnInit {
     this.currentPage = event.pageIndex;
     this.configService.setChildrenPerPage(event.pageSize);
     this.selectPageEvent.emit(this.currentPage);
-    this.backendService.getChildren(this.kindergartenIDFilter, this.currentPage);
+    this.backendService.getChildren(this.kindergartenIDFilter, this.currentPage, this.isOrderByName);
   }
 
   initiateSpinner() {

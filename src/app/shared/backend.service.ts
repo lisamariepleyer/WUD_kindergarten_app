@@ -21,14 +21,20 @@ export class BackendService {
     });
   }
 
-  public getChildren(kindergartenID= 0, page = 0) {
+  public getChildren(kindergartenID= 0, page = 0,
+                     isOrderedByName = false) {
+
+    var orderParam = ""
+    if (isOrderedByName) {
+      orderParam = "&_sort=kindergardenId,name&_order=asc,asc"
+    }
 
     var kindergartenFilterParam = ""
     if (kindergartenID > 0) {
       kindergartenFilterParam = `&kindergardenId=${kindergartenID}`
     }
 
-    this.http.get<ChildResponse[]>(`http://localhost:5000/childs?_expand=kindergarden&_page=${page + 1}&_limit=${this.configService.getChildrenPerPage()}${kindergartenFilterParam}`, { observe: 'response' }).subscribe(data => {
+    this.http.get<ChildResponse[]>(`http://localhost:5000/childs?_expand=kindergarden&_page=${page + 1}&_limit=${this.configService.getChildrenPerPage()}${kindergartenFilterParam}${orderParam}`, { observe: 'response' }).subscribe(data => {
       this.storeService.children = data.body!;
       this.storeService.childrenTotalCount = Number(data.headers.get('X-Total-Count'));
     });

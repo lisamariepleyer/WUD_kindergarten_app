@@ -1,11 +1,13 @@
 <app-data
   [kindergartenIDFilter]="kindergartenIDFilter"
+  [isOrderByName]="isOrderByName"
   [currentPage]="currentPage"
   (selectPageEvent)="receiveMessage($event)">
 </app-data>
 
 <app-filter-bar
-  (kindergartenIDFilter)="onSetFilter($event)">
+  (kindergartenIDFilter)="toggleSetFilter($event)"
+  (isOrderByName)="toggleSetOrder($event)">
 </app-filter-bar>
 
 <br>
