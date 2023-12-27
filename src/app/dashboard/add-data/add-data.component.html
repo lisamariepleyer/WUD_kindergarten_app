@@ -30,7 +30,7 @@
     <mat-form-field>
         <mat-label>Choose a date</mat-label>
         <input matInput [matDatepicker]="datePicker" formControlName="birthDate" [min]="minDate" [max]="maxDate" required readonly>
-        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-hint>DD/MM/YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="datePicker"></mat-datepicker-toggle>
         <mat-datepicker touchUi #datePicker></mat-datepicker>
         <mat-error>Valides Datum auswählen</mat-error>

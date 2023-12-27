@@ -13,6 +13,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatNativeDateModule } from "@angular/material/core";
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatButtonModule } from "@angular/material/button";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -48,7 +49,9 @@ import { KindergartenPageComponent } from './kindergarten-page/kindergarten-page
     MatExpansionModule,
     MatProgressSpinnerModule
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
