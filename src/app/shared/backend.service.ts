@@ -54,9 +54,12 @@ export class BackendService {
     return this.http.post('http://localhost:5000/childs', child);
   }
 
-  public deleteChildData(childId: string, page: number) {
+  public deleteChildData(childId: string,
+                         kindergartenID= 0, page = 0,
+                         isOrderedByName = false,
+                         isOrderedBySignupDate = false, orderBySignupDate = "asc") {
     this.http.delete(`http://localhost:5000/childs/${childId}`).subscribe(_=> {
-      this.getChildren(page);
+      this.getChildren(kindergartenID, page, isOrderedByName, isOrderedBySignupDate, orderBySignupDate);
     })
   }
 }

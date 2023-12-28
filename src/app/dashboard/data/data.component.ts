@@ -27,8 +27,10 @@ export class DataComponent implements OnInit {
   @Input('signupOrder') signupOrder = "asc";
 
   ngOnInit(): void {
-    console.log(this.kindergartenIDFilter, this.currentPage, this.isOrderByName, this.isOrderBySignupDate, this.signupOrder);
-    this.backendService.getChildren(this.kindergartenIDFilter, this.currentPage, this.isOrderByName, this.isOrderBySignupDate, this.signupOrder);
+    this.backendService.getChildren(this.kindergartenIDFilter, this.currentPage,
+      this.isOrderByName,
+      this.isOrderBySignupDate, this.signupOrder);
+
     this.initiateSpinner();
   }
 
@@ -45,15 +47,21 @@ export class DataComponent implements OnInit {
 
   public cancelRegistration(childId: string) {
     this.initiateSpinner();
-    this.backendService.deleteChildData(childId, this.currentPage);
+
+    this.backendService.deleteChildData(childId,
+      this.kindergartenIDFilter, this.currentPage,
+      this.isOrderByName,
+      this.isOrderBySignupDate, this.signupOrder);
   }
 
   onPageChange(event: PageEvent) {
     this.currentPage = event.pageIndex;
     this.configService.setChildrenPerPage(event.pageSize);
     this.selectPageEvent.emit(this.currentPage);
-    console.log(this.kindergartenIDFilter, this.currentPage, this.isOrderByName, this.isOrderBySignupDate, this.signupOrder);
-    this.backendService.getChildren(this.kindergartenIDFilter, this.currentPage, this.isOrderByName, this.isOrderBySignupDate, this.signupOrder);
+
+    this.backendService.getChildren(this.kindergartenIDFilter, this.currentPage,
+      this.isOrderByName,
+      this.isOrderBySignupDate, this.signupOrder);
   }
 
   initiateSpinner() {
