@@ -22,6 +22,10 @@ export class FilterBarComponent implements OnInit {
   @Output() signupOrder = new EventEmitter<string>();
   signupOrderDefault = "asc";
 
+  get showSignupOrderField(): boolean {
+    return this.filterForm.get('NameOrder').value === 'signupdate';
+  }
+
   ngOnInit(): void {
     this.filterForm = this.formbuilder.group({
       kindergardenFilter: [''],

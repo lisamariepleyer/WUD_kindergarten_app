@@ -17,7 +17,7 @@
     </select>
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field *ngIf="showSignupOrderField">
     <mat-label>Nach Anmeldedatum ordnen</mat-label>
     <select matNativeControl formControlName="SignupOrder" [(ngModel)]="signupOrderDefault">
       <option value="asc">Aufsteigend</option>
