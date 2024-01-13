@@ -44,6 +44,8 @@ export class AddDataComponent implements OnInit{
           next: (response) => {
             this.successMessage = 'Kind erfolgreich angemeldet!';
             this.errorMessage = '';
+
+            this.addChildForm.reset();
           },
           error: (error) => {
             this.errorMessage = 'Anmeldung fehlgeschlagen. Bitte erneut versuchen.';
